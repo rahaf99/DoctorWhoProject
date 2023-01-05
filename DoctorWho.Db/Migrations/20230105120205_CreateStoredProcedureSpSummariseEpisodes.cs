@@ -11,34 +11,30 @@ namespace DoctorWho.Db.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "ViewEpisodes",
-                columns: table => new
-                {
-                    EpisodeId = table.Column<int>(type: "int", nullable: false),
-                    SeriesNumber = table.Column<int>(type: "int", nullable: false),
-                    EpisodeNumber = table.Column<int>(type: "int", nullable: false),
-                    EpisodeType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EpisodeDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AuthorId = table.Column<int>(type: "int", nullable: false),
-                    DoctorId = table.Column<int>(type: "int", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AuthorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DoctorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Companions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Enemies = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                });
+            var proc = @"CREATE OR ALTER PROCEDURE spSummariseEpisodes
+                        AS
+                        SELECT TOP (3)
+                        WITH TIES e.CompanionName
+                        FROM Companions e
+                        INNER JOIN EpisodeCompanions ec ON e.CompanionId = ec.CompanionId
+                        GROUP BY e.CompanionName
+                        ORDER BY COUNT(ec.CompanionId) DESC
+
+                        SELECT TOP (3)
+                        WITH TIES e.EnemyName
+                        FROM Enemies e
+                        INNER JOIN EpisodeEnemies ec ON e.EnemyId = ec.EnemyId
+                        GROUP BY e.EnemyName
+                        ORDER BY COUNT(ec.EnemyId) DESC";
+            migrationBuilder.Sql(proc);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ViewEpisodes");
+            var proc = "DROP PROCEDURE spSummariseEpisodes";
+            migrationBuilder.Sql(proc);
+
         }
     }
 }
