@@ -23,11 +23,18 @@ namespace DoctorWho
         public DbSet<Doctor> Doctors { get; set; }  
         public DbSet<Enemy> Enemies { get; set; }   
         public DbSet<Episode> Episodes { get; set;}
-       public DbSet<EpisodeCompanion> EpisodeCompanions { get; set; }
+        public DbSet<EpisodeCompanion> EpisodeCompanions { get; set; }
         public DbSet<EpisodeEnemy> EpisodeEnemies { get; set; }
-
+        public DbSet<ViewEpisodes> ViewEpisodes { get; set; }
+        public string fnCompanions(int episodeId) => throw new NotSupportedException();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            /* modelBuilder.HasDbFunction(typeof(DoctorWhoCoreDbContext)
+                 .GetMethod(nameof(fnCompanions), new[] { typeof(int) }))
+                 .HasName("fnCompanions"));
+            */
+
+           // modelBuilder.Entity<ViewEpisodes>(v => v.ToView("ViewEpisodes"));
 
             modelBuilder.Entity<Author>().HasData
                 (
