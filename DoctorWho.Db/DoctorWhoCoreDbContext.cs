@@ -1,4 +1,5 @@
-﻿using DoctorWho.Db.Models;
+﻿using DoctorWho.Db;
+using DoctorWho.Db.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ namespace DoctorWho
         {
             optionsBuilder.UseSqlServer("Server=DESKTOP-D0JS7AA;Database=DoctorWhoCore;Integrated Security=True;Trusted_Connection=True;Trust Server Certificate=true;");
         }
-        public DbSet<Author> Authors { get; set; }  
+        public DbSet<ComEpoFav> ComEpoFav { get; set; }
+        public DbSet<Author> Authors { get; set; }
         public DbSet<Companion> Companions { get; set; } 
         public DbSet<Doctor> Doctors { get; set; }  
         public DbSet<Enemy> Enemies { get; set; }   
@@ -26,7 +28,9 @@ namespace DoctorWho
         public DbSet<EpisodeCompanion> EpisodeCompanions { get; set; }
         public DbSet<EpisodeEnemy> EpisodeEnemies { get; set; }
         public DbSet<ViewEpisodes> ViewEpisodes { get; set; }
-        public string fnCompanions(int episodeId) => throw new NotSupportedException();
+        public static string fnCompanions(int episodeId)=> throw new NotImplementedException();
+       
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             /* modelBuilder.HasDbFunction(typeof(DoctorWhoCoreDbContext)
@@ -34,7 +38,14 @@ namespace DoctorWho
                  .HasName("fnCompanions"));
             */
 
-           // modelBuilder.Entity<ViewEpisodes>(v => v.ToView("ViewEpisodes"));
+            // modelBuilder.Entity<ViewEpisodes>(v => v.ToView("ViewEpisodes"));
+
+
+            modelBuilder.HasDbFunction(typeof(DoctorWhoCoreDbContext).GetMethod(nameof(fnCompanions), new[] { typeof(int) }));
+          
+
+
+
 
             modelBuilder.Entity<Author>().HasData
                 (
