@@ -29,6 +29,7 @@ namespace DoctorWho.Web.Controllers
         {
             if (!_doctorService.DoctorExists(DoctorId))
             {
+                
                 _doctorService.createDoctor(doctorDto);
             }
             else
@@ -36,6 +37,15 @@ namespace DoctorWho.Web.Controllers
                 _doctorService.updateDoctor(doctorDto);
             }
             return (_doctorService.GetDoctorById(DoctorId));
+        }
+        [HttpDelete]
+        public ActionResult DeleteDoctor(int DoctorId)
+        {
+            if (_doctorService.DoctorExists(DoctorId))
+            {
+                _doctorService.deleteDoctor(DoctorId);
+            }
+            return NoContent();
         }
     }
 }

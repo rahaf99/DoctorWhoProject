@@ -10,6 +10,7 @@ namespace DoctorWho.Web.Services
         public DoctorDto GetDoctorById(int DoctorId);
         public void updateDoctor(DoctorDto doctor);
         public void createDoctor(DoctorDto doctor);
+        public void deleteDoctor(int DoctorId);
 
     }
 }
