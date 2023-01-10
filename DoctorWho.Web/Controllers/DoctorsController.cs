@@ -11,7 +11,7 @@ namespace DoctorWho.Web.Controllers
     {
         private readonly IDoctorService _doctorService;
         private readonly IMapper _mapper;
-        public DoctorsController(IDoctorService doctorService,IMapper mapper)
+        public DoctorsController(IDoctorService doctorService, IMapper mapper)
         {
             _doctorService = doctorService ?? throw new ArgumentException(nameof(doctorService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -20,8 +20,22 @@ namespace DoctorWho.Web.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<DoctorDto>> GetAllDoctors()
         {
-            var DoctorsFromRepository = _doctorService.GetAllDoctors();         
+            var DoctorsFromRepository = _doctorService.GetAllDoctors();
             return new JsonResult(_mapper.Map<IEnumerable<DoctorDto>>(DoctorsFromRepository));
+        }
+
+        [HttpPut("DoctorId")]
+        public ActionResult<DoctorDto> UpdateDoctor(int DoctorId, DoctorDto doctorDto)
+        {
+            if (!_doctorService.DoctorExists(DoctorId))
+            {
+                _doctorService.createDoctor(doctorDto);
+            }
+            else
+            {
+                _doctorService.updateDoctor(doctorDto);
+            }
+            return (_doctorService.GetDoctorById(DoctorId));
         }
     }
 }

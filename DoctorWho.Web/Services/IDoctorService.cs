@@ -7,5 +7,9 @@ namespace DoctorWho.Web.Services
     {
         public IEnumerable<DoctorDto> GetAllDoctors();
         public bool DoctorExists(int DoctorId);
+        public DoctorDto GetDoctorById(int DoctorId);
+        public void updateDoctor(DoctorDto doctor);
+        public void createDoctor(DoctorDto doctor);
+
     }
 }

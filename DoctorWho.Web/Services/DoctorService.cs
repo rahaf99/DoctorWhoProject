@@ -2,6 +2,7 @@
 using DoctorWho.Db.Entities;
 using DoctorWho.Db.Interfaces;
 using DoctorWho.Web.Models;
+using System.Numerics;
 
 namespace DoctorWho.Web.Services
 {
@@ -27,6 +28,24 @@ namespace DoctorWho.Web.Services
         {
             var response = _repository.DoctorExists(DoctorId);
             return response;
+        }
+
+        public DoctorDto GetDoctorById(int DoctorId)
+        {
+            var doctor = _repository.GetDoctorById(DoctorId);
+            var response =  _mapper.Map<DoctorDto>(doctor);
+            return response;
+        }
+
+        public void updateDoctor(DoctorDto doctorDto)
+        {
+            var doctor = _mapper.Map<Doctor>(doctorDto);
+            _repository.updateDoctor(doctor);
+        }
+        public void createDoctor(DoctorDto doctorDto)
+        {
+            var doctor = _mapper.Map<Doctor>(doctorDto);
+            _repository.createDoctor(doctor);
         }
 
 

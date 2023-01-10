@@ -9,11 +9,12 @@ namespace DoctorWho.Db.Interfaces
 {
     public interface IDoctorRepository
     {
-        public void createDoctor(string number, string name, DateTime BirthDate, DateTime FirstEpisodeDate, DateTime LastEpisodeDate);
-        public void updateDoctor(int id, string number, string name, DateTime BirthDate, DateTime FirstEpisodeDate, DateTime LastEpisodeDate);
+        public void createDoctor(Doctor doctor);
+        public void updateDoctor(Doctor doctor);
         public void deleteDoctor(int id);
         public List<Doctor> GetAllDoctors();
         public bool DoctorExists(int id);
+        public Doctor GetDoctorById(int id);
 
 
     }

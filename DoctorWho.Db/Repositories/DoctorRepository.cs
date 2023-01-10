@@ -12,17 +12,14 @@ namespace DoctorWho.Db.Repositories
     {
         DoctorWhoCoreDbContext _context = new DoctorWhoCoreDbContext();
         
-        public void createDoctor(string number, string name, DateTime BirthDate, DateTime FirstEpisodeDate, DateTime LastEpisodeDate)
+        public void createDoctor(Doctor doctor)
         {
-
-            Doctor d = new Doctor { DoctorNumber = number, DoctorName = name, BirthDate = BirthDate, FirstEpisodeDate = FirstEpisodeDate, LastEpisodeDate = LastEpisodeDate };
-            _context.Doctors.Add(d);
+            _context.Doctors.Add(doctor);
             _context.SaveChanges();
         }
-        public void updateDoctor(int id, string number, string name, DateTime BirthDate, DateTime FirstEpisodeDate, DateTime LastEpisodeDate)
+        public void updateDoctor(Doctor doctor)
         {
-            Doctor d = new Doctor { DoctorId = id, DoctorNumber = number, DoctorName = name, BirthDate = BirthDate, FirstEpisodeDate = FirstEpisodeDate, LastEpisodeDate = LastEpisodeDate };
-            _context.Update(d);
+            _context.Update(doctor);
             _context.SaveChanges();
         }
         public void deleteDoctor(int id)
@@ -36,7 +33,11 @@ namespace DoctorWho.Db.Repositories
             return _context.Doctors.ToList();
      
         }
-
+        public Doctor GetDoctorById(int id)
+        {
+            Doctor d = _context.Doctors.Find(id);
+            return d;
+        }
         public bool DoctorExists(int id)
         {
             Doctor d = _context.Doctors.Find(id);
@@ -44,5 +45,7 @@ namespace DoctorWho.Db.Repositories
                 return true;
             return false;
         }
+
+   
     }
 }
