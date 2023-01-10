@@ -1,4 +1,5 @@
-﻿using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.Entities;
+using DoctorWho.Db.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace DoctorWho.Db.Repositories
 {
-    public class DoctorRepository
+    public class DoctorRepository:IDoctorRepository
     {
         DoctorWhoCoreDbContext _context = new DoctorWhoCoreDbContext();
-
+        
         public void createDoctor(string number, string name, DateTime BirthDate, DateTime FirstEpisodeDate, DateTime LastEpisodeDate)
         {
 
@@ -30,14 +31,18 @@ namespace DoctorWho.Db.Repositories
             _context.Doctors.Remove(d);
             _context.SaveChanges();
         }
-        public void GetAllDoctors()
+        public List<Doctor> GetAllDoctors()
         {
-            var Doctors = _context.Doctors.ToList();
-            foreach (var doctor in Doctors)
-            {
-                Console.WriteLine(doctor.DoctorName);
-            }
+            return _context.Doctors.ToList();
+     
         }
 
+        public bool DoctorExists(int id)
+        {
+            Doctor d = _context.Doctors.Find(id);
+            if(!d.Equals(null))
+                return true;
+            return false;
+        }
     }
 }

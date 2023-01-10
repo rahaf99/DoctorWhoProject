@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using DoctorWho;
-using DoctorWho.Db.Models;
+using DoctorWho.Db.Entities;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -28,12 +28,7 @@ internal class Program
         //var query1 = _context.Database.ExecuteSqlRaw(" select [dbo].[fnCompanions](1);");
         //Console.WriteLine(query1);
 
-        //createAuthor("Author6");
-        //updateAuthor(6, "6*");
-        //deleteAuthor(6);
-        GetAllDoctors();
-        GetEnemyById(2);
-        GetCompanionById(2);
+       
     }
     string getEnemies(int EpisodeId)
     {

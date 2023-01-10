@@ -1,4 +1,4 @@
-﻿using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

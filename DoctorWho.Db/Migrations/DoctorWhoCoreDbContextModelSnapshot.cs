@@ -22,7 +22,7 @@ namespace DoctorWho.Db.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DoctorWho.Db.Models.Author", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.Author", b =>
                 {
                     b.Property<int>("AuthorId")
                         .ValueGeneratedOnAdd()
@@ -66,7 +66,7 @@ namespace DoctorWho.Db.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.Companion", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.Companion", b =>
                 {
                     b.Property<int>("CompanionId")
                         .ValueGeneratedOnAdd()
@@ -119,7 +119,7 @@ namespace DoctorWho.Db.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.Doctor", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.Doctor", b =>
                 {
                     b.Property<int>("DoctorId")
                         .ValueGeneratedOnAdd()
@@ -196,7 +196,7 @@ namespace DoctorWho.Db.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.Enemy", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.Enemy", b =>
                 {
                     b.Property<int>("EnemyId")
                         .ValueGeneratedOnAdd()
@@ -249,7 +249,7 @@ namespace DoctorWho.Db.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.Episode", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.Episode", b =>
                 {
                     b.Property<int>("EpisodeId")
                         .ValueGeneratedOnAdd()
@@ -415,7 +415,7 @@ namespace DoctorWho.Db.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.EpisodeCompanion", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.EpisodeCompanion", b =>
                 {
                     b.Property<int>("EpisodeCompanionId")
                         .ValueGeneratedOnAdd()
@@ -500,7 +500,7 @@ namespace DoctorWho.Db.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.EpisodeEnemy", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.EpisodeEnemy", b =>
                 {
                     b.Property<int>("EpisodeEnemyId")
                         .ValueGeneratedOnAdd()
@@ -585,7 +585,7 @@ namespace DoctorWho.Db.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.ViewEpisodes", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.ViewEpisodes", b =>
                 {
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
@@ -636,15 +636,15 @@ namespace DoctorWho.Db.Migrations
                     b.ToTable("ViewEpisodes");
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.Episode", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.Episode", b =>
                 {
-                    b.HasOne("DoctorWho.Db.Models.Author", "Author")
+                    b.HasOne("DoctorWho.Db.Entities.Author", "Author")
                         .WithMany("Episodes")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DoctorWho.Db.Models.Doctor", "Doctor")
+                    b.HasOne("DoctorWho.Db.Entities.Doctor", "Doctor")
                         .WithMany("Episodes")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -655,15 +655,15 @@ namespace DoctorWho.Db.Migrations
                     b.Navigation("Doctor");
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.EpisodeCompanion", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.EpisodeCompanion", b =>
                 {
-                    b.HasOne("DoctorWho.Db.Models.Companion", "Companion")
+                    b.HasOne("DoctorWho.Db.Entities.Companion", "Companion")
                         .WithMany("EpisodeCompanions")
                         .HasForeignKey("CompanionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DoctorWho.Db.Models.Episode", "Episode")
+                    b.HasOne("DoctorWho.Db.Entities.Episode", "Episode")
                         .WithMany("EpisodeCompanions")
                         .HasForeignKey("EpisodeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -674,15 +674,15 @@ namespace DoctorWho.Db.Migrations
                     b.Navigation("Episode");
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.EpisodeEnemy", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.EpisodeEnemy", b =>
                 {
-                    b.HasOne("DoctorWho.Db.Models.Enemy", "Enemy")
+                    b.HasOne("DoctorWho.Db.Entities.Enemy", "Enemy")
                         .WithMany("EpisodeEnemies")
                         .HasForeignKey("EnemyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DoctorWho.Db.Models.Episode", "Episode")
+                    b.HasOne("DoctorWho.Db.Entities.Episode", "Episode")
                         .WithMany("EpisodeEnemies")
                         .HasForeignKey("EpisodeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -693,27 +693,27 @@ namespace DoctorWho.Db.Migrations
                     b.Navigation("Episode");
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.Author", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.Author", b =>
                 {
                     b.Navigation("Episodes");
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.Companion", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.Companion", b =>
                 {
                     b.Navigation("EpisodeCompanions");
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.Doctor", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.Doctor", b =>
                 {
                     b.Navigation("Episodes");
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.Enemy", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.Enemy", b =>
                 {
                     b.Navigation("EpisodeEnemies");
                 });
 
-            modelBuilder.Entity("DoctorWho.Db.Models.Episode", b =>
+            modelBuilder.Entity("DoctorWho.Db.Entities.Episode", b =>
                 {
                     b.Navigation("EpisodeCompanions");
 

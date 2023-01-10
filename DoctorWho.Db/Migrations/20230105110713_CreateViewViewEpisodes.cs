@@ -1,4 +1,4 @@
-﻿using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.Entities;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System.Diagnostics.Metrics;
 
