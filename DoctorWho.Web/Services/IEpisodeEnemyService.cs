@@ -4,7 +4,7 @@ namespace DoctorWho.Web.Services
 {
     public interface IEpisodeEnemyService
     {
-        public void AddEnemyToEpisode(EpisodeEnemyDto);
+        public void AddEnemyToEpisode(EpisodeEnemyDto episodeEnemyDto);
 
     }
 }

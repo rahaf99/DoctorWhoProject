@@ -1,4 +1,5 @@
 ﻿using DoctorWho.Db.Entities;
+using DoctorWho.Db.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,17 @@ using System.Threading.Tasks;
 
 namespace DoctorWho.Db.Repositories
 {
-    public class AuthorRepository
+    public class AuthorRepository:IAuthorRepository
     {
         DoctorWhoCoreDbContext _context= new DoctorWhoCoreDbContext();
-        public  void createAuthor(string name)
+        public  void createAuthor(Author author)
         {
-            Author a = new Author { AuthorName = name };
-            _context.Authors.Add(a);
+            _context.Authors.Add(author);
             _context.SaveChanges();
         }
-        public  void updateAuthor(int id, string newName)
+        public  void updateAuthor(Author author)
         {
-            Author c = new Author { AuthorId = id, AuthorName = newName };
-            _context.Update(c);
+            _context.Update(author);
             _context.SaveChanges();
         }
         public  void deleteAuthor(int id)
@@ -29,6 +28,12 @@ namespace DoctorWho.Db.Repositories
             _context.Authors.Remove(c);
             _context.SaveChanges();
         }
-
+        public bool AuthorExists(int id)
+        {
+            Author a = _context.Authors.Find(id);
+            if (!a.Equals(null))
+                return true;
+            return false;
+        }
     }
 }
