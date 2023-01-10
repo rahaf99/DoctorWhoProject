@@ -38,6 +38,7 @@ namespace DoctorWho.Web.Controllers
             }
             return (_doctorService.GetDoctorById(DoctorId));
         }
+
         [HttpDelete]
         public ActionResult DeleteDoctor(int DoctorId)
         {
@@ -47,5 +48,7 @@ namespace DoctorWho.Web.Controllers
             }
             return NoContent();
         }
+
+
     }
 }

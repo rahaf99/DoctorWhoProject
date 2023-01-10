@@ -1,4 +1,5 @@
 ﻿using DoctorWho.Db.Entities;
+using DoctorWho.Db.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,12 @@ using System.Threading.Tasks;
 
 namespace DoctorWho.Db.Repositories
 {
-    public  class EpisodeEnemyRepository
+    public  class EpisodeEnemyRepository:IEpisodeEnemyRepository
     {
         DoctorWhoCoreDbContext _context = new DoctorWhoCoreDbContext();
-        public void AddEnemyToEpisode(int EpisodeId, int EnemyId)
+        public void AddEnemyToEpisode(EpisodeEnemy episodeEnemy)
         {
-            EpisodeEnemy ee = new EpisodeEnemy { EpisodeId = EpisodeId, EnemyId = EnemyId };
-            _context.EpisodeEnemies.Add(ee);
+            _context.EpisodeEnemies.Add(episodeEnemy);
             _context.SaveChanges();
         }
 

@@ -1,4 +1,5 @@
 ﻿using DoctorWho.Db.Entities;
+using DoctorWho.Db.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,20 +8,19 @@ using System.Threading.Tasks;
 
 namespace DoctorWho.Db.Repositories
 {
-    public class EpisodeRepository
+    public class EpisodeRepository:IEpisodeRepository
     {
         DoctorWhoCoreDbContext _context = new DoctorWhoCoreDbContext();
 
-        public void createEpisode(int SeriesNumber, int EpisodeNumber, string EpisodeType, string Title, DateTime EpisodeDate, int AuthorId, int DoctorId, string Notes)
+        public Episode createEpisode(Episode episode)
         {
-            Episode e = new Episode { SeriesNumber = SeriesNumber, EpisodeNumber = EpisodeNumber, EpisodeType = EpisodeType, Title = Title, EpisodeDate = EpisodeDate, AuthorId = AuthorId, DoctorId = DoctorId, Notes = Notes };
-            _context.Episodes.Add(e);
+            _context.Episodes.Add(episode);
             _context.SaveChanges();
+            return episode;
         }
-        public void updateEpisode(int id, int SeriesNumber, int EpisodeNumber, string EpisodeType, string Title, DateTime EpisodeDate, int AuthorId, int DoctorId, string Notes)
+        public void updateEpisode(Episode episode)
         {
-            Episode e = new Episode { EpisodeId = id, SeriesNumber = SeriesNumber, EpisodeNumber = EpisodeNumber, EpisodeType = EpisodeType, Title = Title, EpisodeDate = EpisodeDate, AuthorId = AuthorId, DoctorId = DoctorId, Notes = Notes };
-            _context.Update(e);
+            _context.Update(episode);
             _context.SaveChanges();
         }
         public void deleteEpisode(int id)
@@ -28,6 +28,11 @@ namespace DoctorWho.Db.Repositories
             Episode d = _context.Episodes.Find(id);
             _context.Episodes.Remove(d);
             _context.SaveChanges();
+        }
+        public List<Episode> GetAllEpisodes()
+        {
+            return _context.Episodes.ToList();
+
         }
 
 
