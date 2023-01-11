@@ -1,4 +1,5 @@
 ﻿using DoctorWho.Db.Entities;
+using DoctorWho.Db.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,20 +8,22 @@ using System.Threading.Tasks;
 
 namespace DoctorWho.Db.Repositories
 {
-    public class CompanionRepository
+    public class CompanionRepository: ICompanionRepository
     {
-        DoctorWhoCoreDbContext _context = new DoctorWhoCoreDbContext();
+        private readonly DoctorWhoCoreDbContext _context;
 
-        public  void createCompanion(string name, string who)
+        public CompanionRepository(DoctorWhoCoreDbContext context)
         {
-            Companion c = new Companion { CompanionName = name, WhoPlayed = who };
-            _context.Companions.Add(c);
+            _context = context;
+        }
+        public  void createCompanion(Companion companion)
+        {
+            _context.Companions.Add(companion);
             _context.SaveChanges();
         }
-        public  void updateCompanion(int id, string newName, string newPlayer)
+        public  void updateCompanion(Companion companion)
         {
-            Companion c = new Companion { CompanionId = id, CompanionName = newName, WhoPlayed = newPlayer };
-            _context.Update(c);
+            _context.Update(companion);
             _context.SaveChanges();
         }
         public  void deleteCompanion(int id)

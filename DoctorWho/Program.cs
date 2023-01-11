@@ -13,7 +13,7 @@ internal class Program
     public static DoctorWhoCoreDbContext _context;
     private static void Main(string[] args)
     {
-        _context = new DoctorWhoCoreDbContext();
+       // _context = new DoctorWhoCoreDbContext();
         //SummariseEpisodes();
 
         /*

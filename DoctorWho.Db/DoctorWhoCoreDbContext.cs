@@ -11,13 +11,12 @@ namespace DoctorWho
 {
     public class DoctorWhoCoreDbContext:DbContext
     {
-        public DoctorWhoCoreDbContext()
-        {
-
-        }
+        public DoctorWhoCoreDbContext(DbContextOptions<DoctorWhoCoreDbContext> options) : base(options)
+        { }
+     
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-D0JS7AA;Database=DoctorWhoCore;Integrated Security=True;Trusted_Connection=True;Trust Server Certificate=true;");
+          //  optionsBuilder.UseSqlServer("Server=DESKTOP-D0JS7AA;Database=DoctorWhoCore;Integrated Security=True;Trusted_Connection=True;Trust Server Certificate=true;");
         }
         public DbSet<ComEpoFav> ComEpoFav { get; set; }
         public DbSet<Author> Authors { get; set; }

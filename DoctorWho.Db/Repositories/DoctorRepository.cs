@@ -10,8 +10,12 @@ namespace DoctorWho.Db.Repositories
 {
     public class DoctorRepository:IDoctorRepository
     {
-        DoctorWhoCoreDbContext _context = new DoctorWhoCoreDbContext();
+        private readonly DoctorWhoCoreDbContext _context;
         
+        public DoctorRepository(DoctorWhoCoreDbContext context)
+        {
+            _context = context;
+        }
         public void createDoctor(Doctor doctor)
         {
             _context.Doctors.Add(doctor);

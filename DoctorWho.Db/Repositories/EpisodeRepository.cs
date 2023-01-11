@@ -10,8 +10,12 @@ namespace DoctorWho.Db.Repositories
 {
     public class EpisodeRepository:IEpisodeRepository
     {
-        DoctorWhoCoreDbContext _context = new DoctorWhoCoreDbContext();
+        private readonly DoctorWhoCoreDbContext _context;
 
+        public EpisodeRepository(DoctorWhoCoreDbContext context)
+        {
+            _context = context;
+        }
         public Episode createEpisode(Episode episode)
         {
             _context.Episodes.Add(episode);

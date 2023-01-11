@@ -17,7 +17,7 @@ namespace DoctorWho.Web.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        [HttpGet]
+        [HttpGet()]
         public ActionResult<IEnumerable<DoctorDto>> GetAllDoctors()
         {
             var DoctorsFromRepository = _doctorService.GetAllDoctors();

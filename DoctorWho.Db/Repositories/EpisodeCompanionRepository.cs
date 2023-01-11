@@ -11,7 +11,12 @@ namespace DoctorWho.Db.Repositories
 {
     public class EpisodeCompanionRepository:IEpisodeCompanionRepository
     {
-        DoctorWhoCoreDbContext _context = new DoctorWhoCoreDbContext();
+        private readonly DoctorWhoCoreDbContext _context;
+
+        public EpisodeCompanionRepository(DoctorWhoCoreDbContext context)
+        {
+            _context = context;
+        }
         public void AddCompanionToEpisode(EpisodeCompanion episodeCompanion)
         {
             _context.EpisodeCompanions.Add(episodeCompanion);
