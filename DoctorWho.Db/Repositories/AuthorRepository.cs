@@ -17,17 +17,17 @@ namespace DoctorWho.Db.Repositories
         {
             _context = context;
         }
-        public  void createAuthor(Author author)
+        public  void CreateAuthor(Author author)
         {
             _context.Authors.Add(author);
             _context.SaveChanges();
         }
-        public  void updateAuthor(Author author)
+        public  void UpdateAuthor(Author author)
         {
             _context.Update(author);
             _context.SaveChanges();
         }
-        public  void deleteAuthor(int id)
+        public  void DeleteAuthor(int id)
         {
             Author c = _context.Authors.Find(id);
             _context.Authors.Remove(c);
@@ -35,10 +35,12 @@ namespace DoctorWho.Db.Repositories
         }
         public bool AuthorExists(int id)
         {
-            Author a = _context.Authors.Find(id);
-            if (!a.Equals(null))
-                return true;
-            return false;
+            return _context.Authors.Any(a => a.AuthorId == id);
+        }
+        public List<Author> GetAllAuthors()
+        {
+            return _context.Authors.ToList();
+
         }
     }
 }

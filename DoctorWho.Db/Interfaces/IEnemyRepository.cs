@@ -9,10 +9,11 @@ namespace DoctorWho.Db.Interfaces
 {
     public interface IEnemyRepository
     {
-        public void createEnemy(Enemy enemy);
-        public void updateEnemy(Enemy enemy);
-        public void deleteEnemy(int id);
+        public void CreateEnemy(Enemy enemy);
+        public void UpdateEnemy(Enemy enemy);
+        public void DeleteEnemy(int id);
         public void GetEnemyById(int id);
+        public List<Enemy> GetAllEnemies();
 
 
     }

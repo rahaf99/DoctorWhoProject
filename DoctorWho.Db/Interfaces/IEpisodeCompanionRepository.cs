@@ -10,6 +10,7 @@ namespace DoctorWho.Db.Interfaces
     public interface IEpisodeCompanionRepository
     {
         public void AddCompanionToEpisode(EpisodeCompanion episodeCompanion);
+        public IEnumerable<EpisodeCompanion> GetAllEpisodeCompanions();
 
     }
 }

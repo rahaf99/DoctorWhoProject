@@ -2,6 +2,7 @@
 using DoctorWho.Db.Entities;
 using DoctorWho.Db.Interfaces;
 using DoctorWho.Db.Repositories;
+using DoctorWho.Web.Interfaces;
 using DoctorWho.Web.Models;
 
 namespace DoctorWho.Web.Services
@@ -18,7 +19,6 @@ namespace DoctorWho.Web.Services
             _episodeCompanionRepository = episodeCompanionRepository;
             _mapper = mapper;
         }
-
         public void AddCompanionToEpisode(EpisodeCompanionDto episodeCompanionDto)
         {
             var episodeCompanion = _mapper.Map<EpisodeCompanion>(episodeCompanionDto);
@@ -27,6 +27,11 @@ namespace DoctorWho.Web.Services
 
         }
 
-
+        public IEnumerable<EpisodeCompanionDto> GetAllEpisodeCompanions()
+        {
+            var episodeCompanions = _episodeCompanionRepository.GetAllEpisodeCompanions();
+            var response = episodeCompanions.Select(x => _mapper.Map<EpisodeCompanionDto>(x));
+            return response;
+        }
     }
 }

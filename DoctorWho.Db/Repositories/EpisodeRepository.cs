@@ -16,18 +16,18 @@ namespace DoctorWho.Db.Repositories
         {
             _context = context;
         }
-        public Episode createEpisode(Episode episode)
+        public Episode CreateEpisode(Episode episode)
         {
             _context.Episodes.Add(episode);
             _context.SaveChanges();
             return episode;
         }
-        public void updateEpisode(Episode episode)
+        public void UpdateEpisode(Episode episode)
         {
             _context.Update(episode);
             _context.SaveChanges();
         }
-        public void deleteEpisode(int id)
+        public void DeleteEpisode(int id)
         {
             Episode d = _context.Episodes.Find(id);
             _context.Episodes.Remove(d);

@@ -10,6 +10,7 @@ namespace DoctorWho.Db.Interfaces
     public interface IEpisodeEnemyRepository
     {
         public void AddEnemyToEpisode(EpisodeEnemy episodeEnemy);
+        public List<EpisodeEnemy> GetAllEpisodeEnemies();
 
     }
 }

@@ -16,17 +16,21 @@ namespace DoctorWho.Db.Repositories
         {
             _context = context;
         }
-        public  void createCompanion(Companion companion)
+        public IEnumerable<Companion> GetAllCompanions()
+        {
+            return _context.Companions.ToList();
+        }
+        public void CreateCompanion(Companion companion)
         {
             _context.Companions.Add(companion);
             _context.SaveChanges();
         }
-        public  void updateCompanion(Companion companion)
+        public  void UpdateCompanion(Companion companion)
         {
             _context.Update(companion);
             _context.SaveChanges();
         }
-        public  void deleteCompanion(int id)
+        public  void DeleteCompanion(int id)
         {
             Companion c = _context.Companions.Find(id);
             _context.Companions.Remove(c);

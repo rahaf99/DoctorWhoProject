@@ -8,7 +8,6 @@ namespace DoctorWho.Web.Models
     {
         public int EpisodeId { get; set; }
 
-        [MaxLength(10)]
         public int SeriesNumber { get; set; }
         
         public int EpisodeNumber { get; set; }

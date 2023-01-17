@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DoctorWho.Db.Entities;
 using DoctorWho.Db.Interfaces;
+using DoctorWho.Web.Interfaces;
 using DoctorWho.Web.Models;
 using DoctorWho.Web.Validators;
 using FluentValidation.Results;
@@ -53,7 +54,7 @@ namespace DoctorWho.Web.Services
             else
             {
                 var doctor = _mapper.Map<Doctor>(doctorDto);
-                _repository.updateDoctor(doctor);
+                _repository.UpdateDoctor(doctor);
             }
         }
         public void createDoctor(DoctorDto doctorDto)
@@ -69,14 +70,14 @@ namespace DoctorWho.Web.Services
             else
             {
                 var doctor = _mapper.Map<Doctor>(doctorDto);
-                _repository.createDoctor(doctor);
+                _repository.CreateDoctor(doctor);
             }
 
         }
 
         public void deleteDoctor(int DoctorId)
         {
-            _repository.deleteDoctor(DoctorId);
+            _repository.DeleteDoctor(DoctorId);
         }
     }
 }

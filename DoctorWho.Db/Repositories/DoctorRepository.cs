@@ -16,17 +16,17 @@ namespace DoctorWho.Db.Repositories
         {
             _context = context;
         }
-        public void createDoctor(Doctor doctor)
+        public void CreateDoctor(Doctor doctor)
         {
             _context.Doctors.Add(doctor);
             _context.SaveChanges();
         }
-        public void updateDoctor(Doctor doctor)
+        public void UpdateDoctor(Doctor doctor)
         {
             _context.Update(doctor);
             _context.SaveChanges();
         }
-        public void deleteDoctor(int id)
+        public void DeleteDoctor(int id)
         {
             Doctor d = _context.Doctors.Find(id);
             _context.Doctors.Remove(d);
@@ -44,12 +44,8 @@ namespace DoctorWho.Db.Repositories
         }
         public bool DoctorExists(int id)
         {
-            Doctor d = _context.Doctors.Find(id);
-            if(!d.Equals(null))
-                return true;
-            return false;
+             return _context.Doctors.Any(m=>m.DoctorId==id);
         }
-
-   
+  
     }
 }

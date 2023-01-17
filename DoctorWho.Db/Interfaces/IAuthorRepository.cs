@@ -10,10 +10,11 @@ namespace DoctorWho.Db.Interfaces
 {
     public interface IAuthorRepository
     {
-        public void createAuthor(Author author);
-        public void updateAuthor(Author author);
-        public void deleteAuthor(int id);
+        public void CreateAuthor(Author author);
+        public void UpdateAuthor(Author author);
+        public void DeleteAuthor(int id);
         public bool AuthorExists(int id);
+        public List<Author> GetAllAuthors();
 
     }
 }

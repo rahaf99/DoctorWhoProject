@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DoctorWho.Db.Entities;
 using DoctorWho.Db.Interfaces;
+using DoctorWho.Web.Interfaces;
 using DoctorWho.Web.Models;
 using DoctorWho.Web.Validators;
 using FluentValidation.Results;
@@ -11,24 +12,24 @@ namespace DoctorWho.Web.Services
     public class EpisodeService : IEpisodeService
     {
         private readonly DoctorWhoCoreDbContext _context;
-        private readonly IEpisodeRepository _repository;
+        private readonly IEpisodeRepository _episodeRepository;
         private readonly IMapper _mapper;
         private readonly EpisodeValidator _episodeValidator;
         public EpisodeService(DoctorWhoCoreDbContext context, IEpisodeRepository repository, IMapper mapper, EpisodeValidator episodeValidator)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _repository = repository;
+            _episodeRepository = repository;
             _mapper = mapper;
             _episodeValidator = episodeValidator;
         }
 
         public IEnumerable<EpisodeDto> GetAllEpisodes()
         {
-            var episodes = _repository.GetAllEpisodes();
+            var episodes = _episodeRepository.GetAllEpisodes();
             var response = episodes.Select(x => _mapper.Map<EpisodeDto>(x));
             return response;
         }
-        public Episode createEpisode(EpisodeDto episodeDto)
+        public Episode CreateEpisode(EpisodeDto episodeDto)
         {
             ValidationResult result = _episodeValidator.Validate(episodeDto);
             if (!result.IsValid)
@@ -41,7 +42,7 @@ namespace DoctorWho.Web.Services
             else
             {
                 var episode = _mapper.Map<Episode>(episodeDto);
-                _repository.createEpisode(episode);
+                _episodeRepository.CreateEpisode(episode);
                 return episode;
             }
             return null;

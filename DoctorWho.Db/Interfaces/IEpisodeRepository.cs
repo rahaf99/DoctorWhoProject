@@ -10,9 +10,9 @@ namespace DoctorWho.Db.Interfaces
 {
     public interface IEpisodeRepository
     {
-        public Episode createEpisode(Episode episode);
-        public void updateEpisode(Episode episode);
-        public void deleteEpisode(int id);
+        public Episode CreateEpisode(Episode episode);
+        public void UpdateEpisode(Episode episode);
+        public void DeleteEpisode(int id);
         public List<Episode> GetAllEpisodes();
 
 

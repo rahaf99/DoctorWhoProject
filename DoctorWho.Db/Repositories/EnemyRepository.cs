@@ -12,21 +12,29 @@ namespace DoctorWho.Db.Repositories
     {
         private readonly DoctorWhoCoreDbContext _context;
 
+
         public EnemyRepository(DoctorWhoCoreDbContext context)
         {
-            _context = context;
+            _context= context;
         }
-        public void createEnemy(Enemy enemy)
+
+        
+        public List<Enemy> GetAllEnemies()
+        {
+            return _context.Enemies.ToList();
+
+        }
+        public void CreateEnemy(Enemy enemy)
         {
             _context.Enemies.Add(enemy);
             _context.SaveChanges();
-        }
-        public void updateEnemy(Enemy enemy)
+         }
+        public void UpdateEnemy(Enemy enemy)
         {
             _context.Update(enemy);
             _context.SaveChanges();
         }
-        public void deleteEnemy(int id)
+        public void DeleteEnemy(int id)
         {
             Enemy d = _context.Enemies.Find(id);
             _context.Enemies.Remove(d);

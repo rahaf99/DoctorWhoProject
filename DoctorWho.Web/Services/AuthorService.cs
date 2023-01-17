@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DoctorWho.Db.Entities;
 using DoctorWho.Db.Interfaces;
+using DoctorWho.Web.Interfaces;
 using DoctorWho.Web.Models;
 using DoctorWho.Web.Validators;
 using Microsoft.EntityFrameworkCore;
@@ -18,19 +19,27 @@ namespace DoctorWho.Web.Services
             _authorRepository = authorRepository;
             _mapper = mapper;
         }
-        public void createAuthor(AuthorDto authorDto)
+
+        public IEnumerable<AuthorDto> GetAllAuthors()
+        {
+            var authors = _authorRepository.GetAllAuthors();
+            var response = authors.Select(x => _mapper.Map<AuthorDto>(x));
+            return response;
+        }
+
+        public void CreateAuthor(AuthorDto authorDto)
         {
             var author = _mapper.Map<Author>(authorDto);
-            _authorRepository.createAuthor(author);
+            _authorRepository.CreateAuthor(author);
 
         }
-        public void updateAuthor(AuthorDto authorDto)
+        public void UpdateAuthor(AuthorDto authorDto)
         {
             var author = _mapper.Map<Author>(authorDto);
-            _authorRepository.updateAuthor(author);
+            _authorRepository.UpdateAuthor(author);
 
         }
-        public void deleteAuthor(int id)
+        public void DeleteAuthor(int id)
         {
 
         }

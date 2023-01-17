@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using DoctorWho.Web.Interfaces;
 using DoctorWho.Web.Models;
-using DoctorWho.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoctorWho.Web.Controllers
@@ -18,18 +18,24 @@ namespace DoctorWho.Web.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-
-        [HttpPut("AuthorId")]
-        public void UpdateAuthor(int AuthorId, AuthorDto authorDto)
+        [HttpGet]
+        public ActionResult<IEnumerable<AuthorDto>> GetAllAuthors()
         {
-            if (!_authorService.AuthorExists(AuthorId))
+            var AuthorsFromRepository = _authorService.GetAllAuthors();
+            return new JsonResult(_mapper.Map<IEnumerable<AuthorDto>>(AuthorsFromRepository));
+        }
+
+        [HttpPut]
+        public void UpdateAuthor( AuthorDto authorDto)
+        {
+            if (!_authorService.AuthorExists(authorDto.AuthorId))
             {
 
-                _authorService.createAuthor(authorDto);
+                _authorService.CreateAuthor(authorDto);
             }
             else
             {
-                _authorService.updateAuthor(authorDto);
+                _authorService.UpdateAuthor(authorDto);
             }
 
         }

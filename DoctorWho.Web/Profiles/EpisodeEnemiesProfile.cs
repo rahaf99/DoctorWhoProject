@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DoctorWho.Db.Entities;
+using DoctorWho.Web.Models;
 
 namespace DoctorWho.Web.Profiles
 {
@@ -7,7 +8,7 @@ namespace DoctorWho.Web.Profiles
     {
         public EpisodeEnemiesProfile()
         {
-            CreateMap<EpisodeEnemy, Models.EpisodeEnemyDto>()
+            CreateMap<EpisodeEnemy, EpisodeEnemyDto>()
                 .ForMember(
                 dest => dest.EpisodeEnemyId,
                 opt => opt.MapFrom(src => $"{src.EpisodeEnemyId}"))
@@ -17,6 +18,17 @@ namespace DoctorWho.Web.Profiles
                 .ForMember(
                 dest => dest.EnemyId,
                 opt => opt.MapFrom(src => $"{src.EnemyId}"));
+
+            CreateMap<EpisodeEnemyDto, EpisodeEnemy>()
+                 .ForMember(
+                 dest => dest.EpisodeEnemyId,
+                 opt => opt.MapFrom(src => $"{src.EpisodeEnemyId}"))
+                 .ForMember(
+                 dest => dest.EpisodeId,
+                 opt => opt.MapFrom(src => $"{src.EpisodeId}"))
+                 .ForMember(
+                 dest => dest.EnemyId,
+                 opt => opt.MapFrom(src => $"{src.EnemyId}"));
         }
     }
 }

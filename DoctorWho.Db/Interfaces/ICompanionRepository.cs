@@ -9,9 +9,10 @@ namespace DoctorWho.Db.Interfaces
 {
     public interface ICompanionRepository
     {
-        public void createCompanion(Companion companion );
-        public void updateCompanion(Companion companion);
-        public void deleteCompanion(int id);
+        public IEnumerable<Companion> GetAllCompanions();
+        public void CreateCompanion(Companion companion );
+        public void UpdateCompanion(Companion companion);
+        public void DeleteCompanion(int id);
         public void GetCompanionById(int id);
 
 

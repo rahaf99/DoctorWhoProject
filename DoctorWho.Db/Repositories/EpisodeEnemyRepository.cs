@@ -21,6 +21,10 @@ namespace DoctorWho.Db.Repositories
             _context.EpisodeEnemies.Add(episodeEnemy);
             _context.SaveChanges();
         }
+        public List<EpisodeEnemy> GetAllEpisodeEnemies()
+        {
+            return _context.EpisodeEnemies.ToList();
 
+        }
     }
 }

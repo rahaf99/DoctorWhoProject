@@ -22,6 +22,11 @@ namespace DoctorWho.Db.Repositories
             _context.EpisodeCompanions.Add(episodeCompanion);
             _context.SaveChanges();
         }
+        public IEnumerable<EpisodeCompanion> GetAllEpisodeCompanions()
+        {
+            return _context.EpisodeCompanions.ToList();
+
+        }
 
     }
 }

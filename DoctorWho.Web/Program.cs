@@ -2,6 +2,7 @@ using AutoMapper;
 using DoctorWho;
 using DoctorWho.Db.Interfaces;
 using DoctorWho.Db.Repositories;
+using DoctorWho.Web.Interfaces;
 using DoctorWho.Web.Services;
 using DoctorWho.Web.Validators;
 using Microsoft.EntityFrameworkCore;
@@ -22,13 +23,20 @@ builder.Services.AddTransient<IEnemyRepository, EnemyRepository>();
 builder.Services.AddTransient<IEpisodeCompanionRepository, EpisodeCompanionRepository>();
 builder.Services.AddTransient<IEpisodeEnemyRepository, EpisodeEnemyRepository>();
 builder.Services.AddTransient<IEpisodeRepository, EpisodeRepository>();
+
+
 builder.Services.AddTransient<IAuthorService, AuthorService>();
 builder.Services.AddTransient<IDoctorService , DoctorService>();
 builder.Services.AddTransient<IEpisodeService , EpisodeService >();
 builder.Services.AddTransient<IEpisodeCompanionService , EpisodeCompanionService >();
 builder.Services.AddTransient<IEpisodeEnemyService, EpisodeEnemyService>();
+builder.Services.AddTransient<IEnemyService, EnemyService>();
+builder.Services.AddTransient<ICompanionService,CompanionService>();
+
+
 builder.Services.AddTransient<DoctorValidator, DoctorValidator>();
 builder.Services.AddTransient<EpisodeValidator, EpisodeValidator>();
+
 
 builder.Services.AddDbContext<DoctorWhoCoreDbContext>
     (options => options.UseSqlServer(builder.Configuration["ConnectionStrings:DoctorWhoDbContextConnection"]));

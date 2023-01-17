@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DoctorWho.Db.Entities;
+using DoctorWho.Web.Interfaces;
 using DoctorWho.Web.Models;
-using DoctorWho.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoctorWho.Web.Controllers
@@ -11,8 +11,6 @@ namespace DoctorWho.Web.Controllers
     public class EpisodesController : Controller
     {
         private readonly IEpisodeService _episodeService;
-        private readonly IEpisodeEnemyService _episodeEnemyService;
-        private readonly IEpisodeCompanionService _episodeCompanionService;
         private readonly IMapper _mapper;
         public EpisodesController(IEpisodeService episodeService, IMapper mapper)
         {
@@ -28,25 +26,11 @@ namespace DoctorWho.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Episode> CreateEpisode(EpisodeDto episodeDto)
+        public ActionResult<EpisodeDto> CreateEpisode([FromBody] EpisodeDto episodeDto)
         {
-            _episodeService.createEpisode(episodeDto);
-            Episode response = _mapper.Map<Episode>(episodeDto);
+            _episodeService.CreateEpisode(episodeDto);
+            EpisodeDto response = _mapper.Map<EpisodeDto>(episodeDto);
             return response;
-        }
-
-        [HttpPost]
-        public void AddEnemyToEpisode(EpisodeEnemyDto episodeEnemyDto)
-        {
-            _episodeEnemyService.AddEnemyToEpisode(episodeEnemyDto);
-
-        }
-
-        [HttpPost]
-        public void AddCompanionToEpisode(EpisodeCompanionDto episodeCompanionDto)
-        {
-            _episodeCompanionService.AddCompanionToEpisode(episodeCompanionDto);
-
         }
     }
 }
