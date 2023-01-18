@@ -7,8 +7,8 @@ namespace DoctorWho.Web.Interfaces
     {
 
         public Episode CreateEpisode(EpisodeDto episodeDto);
-        public void updateEpisode(EpisodeDto episodeDto);
-        public void deleteEpisode(int id);
+        public void UpdateEpisode(EpisodeDto episodeDto);
+        public void DeleteEpisode(int id);
         public IEnumerable<EpisodeDto> GetAllEpisodes();
 
     }

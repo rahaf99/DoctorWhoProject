@@ -18,6 +18,7 @@ namespace DoctorWho.Web.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        //Get All Doctors from DB
         [HttpGet]
         public ActionResult<IEnumerable<DoctorDto>> GetAllDoctors()
         {
@@ -25,46 +26,47 @@ namespace DoctorWho.Web.Controllers
             return new JsonResult(_mapper.Map<IEnumerable<DoctorDto>>(DoctorsFromRepository));
         }
 
+        //Get A specific doctor from DB
         [HttpGet("{doctorId}")]
         public DoctorDto GetDoctorById(int doctorId)
         {
             return _doctorService.GetDoctorById(doctorId);
-            
         }
 
+        //update a specific doctor in DB if it is exist and create a new one if it is not exist
         [HttpPut]
-        public ActionResult<DoctorDto> UpdateDoctor([FromBody]DoctorDto doctorDto)
+        public ActionResult<DoctorDto> UpdateDoctor([FromBody] DoctorDto doctorDto)
         {
             if (doctorDto is null)
                 return NotFound();
-            
+
             if (!_doctorService.DoctorExists(doctorDto.DoctorId))
             {
-                _doctorService.createDoctor(doctorDto);
+                _doctorService.CreateDoctor(doctorDto);
             }
             else
             {
-                _doctorService.updateDoctor(doctorDto);
+                _doctorService.UpdateDoctor(doctorDto);
             }
             return (_doctorService.GetDoctorById(doctorDto.DoctorId));
         }
 
+        //Add new doctor to the DB
         [HttpPost]
         public void createDoctor([FromBody] DoctorDto doctorDto)
         {
-            _doctorService.createDoctor(doctorDto);
+            _doctorService.CreateDoctor(doctorDto);
         }
 
+        //Delete a specific doctor from DB
         [HttpDelete("{DoctorId}")]
         public ActionResult DeleteDoctor(int DoctorId)
         {
             if (_doctorService.DoctorExists(DoctorId))
             {
-                 _doctorService.deleteDoctor(DoctorId);
+                _doctorService.DeleteDoctor(DoctorId);
             }
             return NoContent();
         }
-
-
     }
 }

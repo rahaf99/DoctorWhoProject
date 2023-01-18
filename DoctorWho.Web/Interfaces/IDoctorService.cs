@@ -8,9 +8,9 @@ namespace DoctorWho.Web.Interfaces
         public IEnumerable<DoctorDto> GetAllDoctors();
         public bool DoctorExists(int DoctorId);
         public DoctorDto GetDoctorById(int DoctorId);
-        public void updateDoctor(DoctorDto doctor);
-        public void createDoctor(DoctorDto doctor);
-        public void deleteDoctor(int DoctorId);
+        public void UpdateDoctor(DoctorDto doctor);
+        public void CreateDoctor(DoctorDto doctor);
+        public void DeleteDoctor(int DoctorId);
 
     }
 }

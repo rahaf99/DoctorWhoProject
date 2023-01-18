@@ -18,7 +18,6 @@ namespace DoctorWho
         {
           //  optionsBuilder.UseSqlServer("Server=DESKTOP-D0JS7AA;Database=DoctorWhoCore;Integrated Security=True;Trusted_Connection=True;Trust Server Certificate=true;");
         }
-        public DbSet<ComEpoFav> ComEpoFav { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Companion> Companions { get; set; } 
         public DbSet<Doctor> Doctors { get; set; }  

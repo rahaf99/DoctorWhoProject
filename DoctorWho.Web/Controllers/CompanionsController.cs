@@ -20,6 +20,7 @@ namespace DoctorWho.Web.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        //Get all companions from DB
         [HttpGet]
         public ActionResult<IEnumerable<CompanionDto>> GetAllCompanions()
         {
@@ -27,6 +28,7 @@ namespace DoctorWho.Web.Controllers
             return new JsonResult(_mapper.Map<IEnumerable<CompanionDto>>(CompanionsFromRepository));
         }
 
+        //Add new Companion to DB
         [HttpPost]
         public ActionResult<CompanionDto> CreateCompanion([FromBody] CompanionDto companionDto)
         {
@@ -35,13 +37,16 @@ namespace DoctorWho.Web.Controllers
             return response;
         }
 
+        /*
         [HttpGet("GetAllCompanionsToEpisode")]
         public ActionResult<IEnumerable<EpisodeCompanionDto>> GetAllEpisodeCompanions()
         {
             var EpisodeCompanionsFromRepository = _episodeCompanionService.GetAllEpisodeCompanions();
             return new JsonResult(_mapper.Map<IEnumerable<EpisodeCompanionDto>>(EpisodeCompanionsFromRepository));
         }
+        */
 
+        //link an existing Companion to an existing Episode
 
         [HttpPost("LinkEpisodeToCompanion")]
         public void AddCompanionToEpisode([FromBody] EpisodeCompanionDto episodeCompanionDto)

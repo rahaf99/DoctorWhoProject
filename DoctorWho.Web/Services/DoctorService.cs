@@ -41,7 +41,7 @@ namespace DoctorWho.Web.Services
             return response;
         }
 
-        public void updateDoctor(DoctorDto doctorDto)
+        public void UpdateDoctor(DoctorDto doctorDto)
         {
             ValidationResult result = _doctorValidator.Validate(doctorDto);
             if (!result.IsValid)
@@ -57,7 +57,7 @@ namespace DoctorWho.Web.Services
                 _repository.UpdateDoctor(doctor);
             }
         }
-        public void createDoctor(DoctorDto doctorDto)
+        public void CreateDoctor(DoctorDto doctorDto)
         {
             ValidationResult result = _doctorValidator.Validate(doctorDto);
             if (!result.IsValid)
@@ -75,7 +75,7 @@ namespace DoctorWho.Web.Services
 
         }
 
-        public void deleteDoctor(int DoctorId)
+        public void DeleteDoctor(int DoctorId)
         {
             _repository.DeleteDoctor(DoctorId);
         }

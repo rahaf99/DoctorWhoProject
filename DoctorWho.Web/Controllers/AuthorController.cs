@@ -18,6 +18,7 @@ namespace DoctorWho.Web.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        //Get All Authors from DB
         [HttpGet]
         public ActionResult<IEnumerable<AuthorDto>> GetAllAuthors()
         {
@@ -25,6 +26,7 @@ namespace DoctorWho.Web.Controllers
             return new JsonResult(_mapper.Map<IEnumerable<AuthorDto>>(AuthorsFromRepository));
         }
 
+        //Add new Author to DB
         [HttpPost]
         public ActionResult<AuthorDto> CreateAuthor(AuthorDto authorDto)
         {
@@ -33,10 +35,12 @@ namespace DoctorWho.Web.Controllers
             return response;
         }
 
-
+        //upserting 
+        // update the author if it is exists and create a new one if it is not found 
         [HttpPut]
         public void UpdateAuthor(AuthorDto authorDto)
         {
+            
             if (!_authorService.AuthorExists(authorDto.AuthorId))
             {
 
@@ -48,7 +52,7 @@ namespace DoctorWho.Web.Controllers
             }
         }
 
-
+        // delete a specific author from DB
         [HttpDelete("{authorId}")]
         public void DeleteAuthor(int authorId)
         {

@@ -19,7 +19,8 @@ namespace DoctorWho.Web.Controllers
             _episodeEnemyService = episodeEnemyService ?? throw new ArgumentException(nameof(episodeEnemyService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
-
+        
+        //Get all enemies from DB
         [HttpGet]
         public ActionResult<IEnumerable<EnemyDto>> GetAllEnemies()
         {
@@ -27,7 +28,7 @@ namespace DoctorWho.Web.Controllers
             return new JsonResult(_mapper.Map<IEnumerable<EnemyDto>>(EnemiesFromRepository));
         }
 
-
+        //Add a new Enemy to DB
         [HttpPost]
         public ActionResult<EnemyDto> CreateEnemy([FromBody] EnemyDto enemyDto)
         {
@@ -35,14 +36,15 @@ namespace DoctorWho.Web.Controllers
             EnemyDto response = _mapper.Map<EnemyDto>(enemyDto);
             return response;
         }
-
+        /*
         [HttpGet("GetAllEnemiesToEpisode")]
         public ActionResult<IEnumerable<EpisodeEnemyDto>> GetAllEpisodeEnemies()
         {
             var EpisodeEnemiesFromRepository = _episodeEnemyService.GetAllEpisodeEnemies();
             return new JsonResult(_mapper.Map<IEnumerable<EpisodeEnemyDto>>(EpisodeEnemiesFromRepository));
         }
-
+        */
+        //link an existing Enemy to a specific Episode 
         [HttpPost("LinkEpisodeToEnemy")]
         public void AddEnemyToEpisode([FromBody] EpisodeEnemyDto episodeEnemyDto)
         {

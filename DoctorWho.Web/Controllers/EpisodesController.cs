@@ -18,6 +18,7 @@ namespace DoctorWho.Web.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        //Get All Episodes from DB
         [HttpGet]
         public ActionResult<IEnumerable<EpisodeDto>> GetAllEpisodes()
         {
@@ -25,6 +26,7 @@ namespace DoctorWho.Web.Controllers
             return new JsonResult(_mapper.Map<IEnumerable<EpisodeDto>>(EpisodesFromRepository));
         }
 
+        //Add a new Episode to DB
         [HttpPost]
         public ActionResult<EpisodeDto> CreateEpisode([FromBody] EpisodeDto episodeDto)
         {
@@ -33,16 +35,18 @@ namespace DoctorWho.Web.Controllers
             return response;
         }
 
+        //Delete a specific Episode from DB
         [HttpDelete("{episodeId}")]
-        public void deleteEpisode(int episodeId)
+        public void DeleteEpisode(int episodeId)
         {
-            _episodeService.deleteEpisode(episodeId);
+            _episodeService.DeleteEpisode(episodeId);
         }
 
+        //Update an existing Episode
         [HttpPut]
-        public void updateEpisode([FromBody]EpisodeDto episodeDto)
+        public void UpdateEpisode([FromBody]EpisodeDto episodeDto)
         {
-            _episodeService.updateEpisode(episodeDto);
+            _episodeService.UpdateEpisode(episodeDto);
         }
     }
 }
