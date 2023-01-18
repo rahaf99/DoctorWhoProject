@@ -25,8 +25,17 @@ namespace DoctorWho.Web.Controllers
             return new JsonResult(_mapper.Map<IEnumerable<AuthorDto>>(AuthorsFromRepository));
         }
 
+        [HttpPost]
+        public ActionResult<AuthorDto> CreateAuthor(AuthorDto authorDto)
+        {
+            _authorService.CreateAuthor(authorDto);
+            AuthorDto response = _mapper.Map<AuthorDto>(authorDto);
+            return response;
+        }
+
+
         [HttpPut]
-        public void UpdateAuthor( AuthorDto authorDto)
+        public void UpdateAuthor(AuthorDto authorDto)
         {
             if (!_authorService.AuthorExists(authorDto.AuthorId))
             {
@@ -37,7 +46,20 @@ namespace DoctorWho.Web.Controllers
             {
                 _authorService.UpdateAuthor(authorDto);
             }
-
         }
+
+
+        [HttpDelete("{authorId}")]
+        public void DeleteAuthor(int authorId)
+        {
+            if (_authorService.AuthorExists(authorId))
+            {
+                _authorService.DeleteAuthor(authorId);
+            }
+            
+        }
+
+
+
     }
 }

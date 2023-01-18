@@ -39,9 +39,9 @@ namespace DoctorWho.Web.Services
             _authorRepository.UpdateAuthor(author);
 
         }
-        public void DeleteAuthor(int id)
+        public void DeleteAuthor(int authorId)
         {
-
+            _authorRepository.DeleteAuthor(authorId);
         }
 
         public bool AuthorExists(int AuthorId)

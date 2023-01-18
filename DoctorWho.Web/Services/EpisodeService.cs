@@ -48,14 +48,15 @@ namespace DoctorWho.Web.Services
             return null;
         }
 
-        public void deleteEpisode(int id)
+        public void deleteEpisode(int episodeId)
         {
-            throw new NotImplementedException();
+            _episodeRepository.DeleteEpisode(episodeId);
         }
 
         public void updateEpisode(EpisodeDto episodeDto)
         {
-            throw new NotImplementedException();
+            var episode = _mapper.Map<Episode>(episodeDto);
+            _episodeRepository.UpdateEpisode(episode);
         }
     }
 }

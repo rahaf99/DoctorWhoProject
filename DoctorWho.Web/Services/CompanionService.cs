@@ -25,27 +25,23 @@ namespace DoctorWho.Web.Services
             var response = Companions.Select(x => _mapper.Map<CompanionDto>(x));
             return response;
         }
-
-
         public void CreateCompanion(CompanionDto companionDto)
         {
             var companion = _mapper.Map<Companion>(companionDto);
             _companionRepository.CreateCompanion(companion);
         }
 
-
-
-        public void UpdateCompanion(Companion companion)
+        public void UpdateCompanion(CompanionDto companionDto)
         {
-     
+
         }
         public void DeleteCompanion(int id)
         {
-          
+
         }
         public void GetCompanionById(int id)
         {
- 
+
         }
     }
 }

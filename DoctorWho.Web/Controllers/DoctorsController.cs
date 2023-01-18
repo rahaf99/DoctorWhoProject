@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DoctorWho.Db.Entities;
 using DoctorWho.Web.Interfaces;
 using DoctorWho.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,13 @@ namespace DoctorWho.Web.Controllers
             return new JsonResult(_mapper.Map<IEnumerable<DoctorDto>>(DoctorsFromRepository));
         }
 
+        [HttpGet("{doctorId}")]
+        public DoctorDto GetDoctorById(int doctorId)
+        {
+            return _doctorService.GetDoctorById(doctorId);
+            
+        }
+
         [HttpPut]
         public ActionResult<DoctorDto> UpdateDoctor([FromBody]DoctorDto doctorDto)
         {
@@ -39,6 +47,12 @@ namespace DoctorWho.Web.Controllers
                 _doctorService.updateDoctor(doctorDto);
             }
             return (_doctorService.GetDoctorById(doctorDto.DoctorId));
+        }
+
+        [HttpPost]
+        public void createDoctor([FromBody] DoctorDto doctorDto)
+        {
+            _doctorService.createDoctor(doctorDto);
         }
 
         [HttpDelete("{DoctorId}")]

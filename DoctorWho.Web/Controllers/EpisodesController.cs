@@ -32,5 +32,17 @@ namespace DoctorWho.Web.Controllers
             EpisodeDto response = _mapper.Map<EpisodeDto>(episodeDto);
             return response;
         }
+
+        [HttpDelete("{episodeId}")]
+        public void deleteEpisode(int episodeId)
+        {
+            _episodeService.deleteEpisode(episodeId);
+        }
+
+        [HttpPut]
+        public void updateEpisode([FromBody]EpisodeDto episodeDto)
+        {
+            _episodeService.updateEpisode(episodeDto);
+        }
     }
 }
